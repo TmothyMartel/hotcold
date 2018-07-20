@@ -15,18 +15,15 @@ export default class GameBoard extends React.Component {
 		this.state = {
 			winningNum: Math.floor((Math.random()* 100) + 1),
 			userNum: '',
-			count: 0,
-			guesses: [],
+			guesses: [23],
 			feedback: 'Make A Guess'
 		}
-		this.userInput = this.userInput.bind(this);
 	}
 
 	restart() {
 		this.setState({
 			winningNum: Math.floor((Math.random()* 100) + 1),
 			userNum: '',
-			count: 0,
 			guesses: [],
 			feedback: 'Make A Guess'
 		});
@@ -34,23 +31,35 @@ export default class GameBoard extends React.Component {
 
 	userInput(guess) {
 		this.setState({
-			userNum: guess
+			userNum:guess
 		})
-
 	}
 
+	submitNumbers() {
+		this.setState({
+			guesses: [...this.state.guesses, parseInt(this.state.userNum)]
+		})
+	}
+
+// submitNumbers() {
+// 		const newGuesses = this.state.guesses.slice()
+// 		newGuesses.push(this.state.userNum);
+// 		this.setState({
+// 			guesses: newGuesses
+// 		})
+// 	}
 
 
 	render() {
-			console.log(this.state.userNum);
+			
 		return (
 			<div> 
 				<Header onRestart={() => this.restart()}/>
 			<section className="game-board">
 				<Feedback feedback={this.state.feedback} />
-				<UserGuess onChange={guess => this.userInput(guess)}/>
-				<GuessCount count={4} />
-				<GuessList  guesses={[11,2,3]}/>
+				<UserGuess submitNumbers={() => this.submitNumbers()} userInput={this.state.userNum} onChange={guess => this.userInput(guess)}/>
+				<GuessCount count={this.state.guesses.length} />
+				<GuessList  guesses={this.state.guesses}/>
 			</section>
 			</div>
 		);
