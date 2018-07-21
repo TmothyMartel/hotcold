@@ -3,7 +3,7 @@ import './modal.css'
 
 export default function Modal(props) {
 	return (
-		<div className="overlay" id="modal">
+		<div className="overlay" id="modal" style={props.toggle}>
 			<div className="content">
 				<h3>What do I do?</h3>
 				<div>
@@ -20,7 +20,7 @@ export default function Modal(props) {
 						</li>
 					</ul>
 					<p>So, Are you ready?</p>
-					<a className="close" href="#">Got It!</a>
+					<a className="close" href="#close" onClick={() => props.toggleModal(false)} >Got It!</a>
 				</div>
 			</div>
 		</div>

@@ -6,10 +6,10 @@ export default function NavBar(props) {
 			<nav>
 				<ul>
 					<li className="what">
-						<a  href="#">What ?</a>
+						<a  href="#modal" onClick={() => props.toggleModal(true)}>What ?</a>
 					</li>
 					<li className="new">
-						<a href="#"
+						<a href="#restart"
 						 onClick={() => props.onRestart()}>
 							+ New Game
 						</a>

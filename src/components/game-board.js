@@ -15,8 +15,9 @@ export default class GameBoard extends React.Component {
 		this.state = {
 			winningNum: Math.floor((Math.random()* 100) + 1),
 			userNum: '',
-			guesses: [23],
-			feedback: 'Make A Guess'
+			guesses: [],
+			feedback: 'Make A Guess',
+			showModal: false
 		}
 	}
 
@@ -25,7 +26,8 @@ export default class GameBoard extends React.Component {
 			winningNum: Math.floor((Math.random()* 100) + 1),
 			userNum: '',
 			guesses: [],
-			feedback: 'Make A Guess'
+			feedback: 'Make A Guess',
+			showModal: false
 		});
 	}
 
@@ -35,26 +37,41 @@ export default class GameBoard extends React.Component {
 		})
 	}
 
+
 	submitNumbers() {
+		const difference = Math.abs(this.state.userNum - this.state.winningNum);
+
+		let newFeedback;
+		if (difference >= 50) {
+			newFeedback = 'You are Ice Cold! '
+		} else if (difference >= 30) {
+			newFeedback = 'Getting colder'
+		} else if (difference >= 10) {
+			newFeedback = 'Getting Warmer'
+		} else if (difference >= 1) {
+			newFeedback = 'You are HOT!'
+		} else {
+			newFeedback="You Win!"
+		}
+
 		this.setState({
-			guesses: [...this.state.guesses, parseInt(this.state.userNum)]
+			guesses: [...this.state.guesses, parseInt(this.state.userNum)],
+			feedback: newFeedback
 		})
 	}
 
-// submitNumbers() {
-// 		const newGuesses = this.state.guesses.slice()
-// 		newGuesses.push(this.state.userNum);
-// 		this.setState({
-// 			guesses: newGuesses
-// 		})
-// 	}
+	toggleModal(setting) {
+		this.setState({
+			showModal: setting
+		})
+	}
 
 
 	render() {
-			
+		
 		return (
 			<div> 
-				<Header onRestart={() => this.restart()}/>
+				<Header modal={this.state.showModal} toggleModal={setting => this.toggleModal(setting)} onRestart={() => this.restart()}/>
 			<section className="game-board">
 				<Feedback feedback={this.state.feedback} />
 				<UserGuess submitNumbers={() => this.submitNumbers()} userInput={this.state.userNum} onChange={guess => this.userInput(guess)}/>
@@ -67,3 +84,7 @@ export default class GameBoard extends React.Component {
 	
 }
 //onChange={num => this.setGuess(num)}
+
+ // const showHide = {
+ //        	'display': this.state.showModal ? 'none' : 'block'
+ //    	// };

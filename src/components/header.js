@@ -10,13 +10,14 @@ const style = {
     color: '#fff'
 }
 
-
-
 export default function Header(props) {
+	 const showHide = {
+        	'display': props.modal ? 'block' : 'none' 
+    	};
 	return (
 		<header>
-			<NavBar onRestart={() => props.onRestart()} />
-			<Modal />
+			<NavBar toggleModal={setting => props.toggleModal(setting)} onRestart={() => props.onRestart()} />
+			<Modal toggle={showHide} toggleModal={setting => props.toggleModal(setting)} />
 			<h1 style={style}>Hot or Cold</h1>
 		</header>
 		)
