@@ -16,8 +16,8 @@ export default function Header(props) {
     	};
 	return (
 		<header>
-			<NavBar toggleModal={setting => props.toggleModal(setting)} onRestart={() => props.onRestart()} />
-			<Modal toggle={showHide} toggleModal={setting => props.toggleModal(setting)} />
+			<NavBar toggleModal={props.toggleModal} onRestart={() => props.onRestart()} />
+			<Modal toggle={showHide} toggleModal={props.toggleModal} />
 			<h1 style={style}>Hot or Cold</h1>
 		</header>
 		)

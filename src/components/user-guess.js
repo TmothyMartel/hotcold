@@ -1,15 +1,14 @@
-import React from 'react';
-import './user-guess.css'
+import React from "react";
+import "./user-guess.css";
 //value={this.props.onChange(e=> (e.target.userGuess))}
 export default function UserGuess(props) {
 	function onSubmit(e) {
-		e.preventDefault()
-		props.submitNumbers()
+		e.preventDefault();
 	}
 
 	return (
-		<form onSubmit={e => onSubmit(e)}>
-			<input 
+		<form id="myForm" onSubmit={e => onSubmit(e)}>
+			<input
 				type="number"
 				name="userGuess"
 				id="userGuess"
@@ -19,17 +18,18 @@ export default function UserGuess(props) {
 				placeholder="Enter your Guess"
 				value={props.userInput}
 				required
-				onChange={e => props.onChange(e.target.value)}
+				onChange={e => {
+					props.onChange(e.target.value);
+				}}
 			/>
-			
-			<input 
-				type="submit" 
-				id="quessButton" 
-				className="button" 
-				name="submit" 
-				value="submit" 
+
+			<input
+				type="submit"
+				id="quessButton"
+				className="button"
+				name="submit"
+				value="submit"
 			/>
 		</form>
 	);
 }
-
